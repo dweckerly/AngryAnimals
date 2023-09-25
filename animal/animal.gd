@@ -8,7 +8,7 @@ const DRAG_LIM_MAX: Vector2 = Vector2(0, 60)
 const DRAG_LIM_MIN: Vector2 = Vector2(-60, 0)
 const IMPULSE_MULT: float = 20.0
 const FIRE_DELAY: float = 0.25
-const STOPPED: float = 0.1
+const STOPPED: float = 0.2
 
 var _dead: bool = false
 var _dragging: bool = false
@@ -77,8 +77,9 @@ func check_on_target() -> void:
 	var cb = get_colliding_bodies()
 	if cb.size() == 0:
 		return
-	if cb[0].is_in_group(GameManager.GROUP_CUP):
-		print("cup died...")
+	var cup = cb[0]
+	if cup.is_in_group(GameManager.GROUP_CUP):
+		cup.die()
 		die()
 
 func play_collision() -> void:
