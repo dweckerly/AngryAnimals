@@ -15,6 +15,12 @@ texture = ExtResource("1_dt5ge")
 [node name="Cup" parent="." instance=ExtResource("2_j2btp")]
 position = Vector2(635, 516)
 
+[node name="Cup2" parent="." instance=ExtResource("2_j2btp")]
+position = Vector2(465, 516)
+
+[node name="Cup3" parent="." instance=ExtResource("2_j2btp")]
+position = Vector2(804, 516)
+
 [node name="DebugLabel" type="Label" parent="."]
 offset_left = 24.0
 offset_top = 24.0

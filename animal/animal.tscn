@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://n4td3g0lv6r8"]
+[gd_scene load_steps=8 format=3 uid="uid://n4td3g0lv6r8"]
 
 [ext_resource type="Texture2D" uid="uid://drloso074wkt6" path="res://assets/player/parrot.png" id="1_0tnf0"]
 [ext_resource type="Script" path="res://animal/animal.gd" id="1_06fwv"]
 [ext_resource type="AudioStream" uid="uid://qigfpfh7r6b8" path="res://assets/audio/stretch2.ogg" id="3_avtv5"]
 [ext_resource type="AudioStream" uid="uid://dbbamaj67f27r" path="res://assets/audio/catapult.ogg" id="4_ftayl"]
+[ext_resource type="AudioStream" uid="uid://dr86rs77iqelv" path="res://assets/audio/kick_wood.ogg" id="5_hgoxt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ye601"]
 bounce = 0.2
@@ -14,6 +15,8 @@ radius = 19.0
 [node name="Animal" type="RigidBody2D"]
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_ye601")
+max_contacts_reported = 1
+contact_monitor = true
 freeze = true
 script = ExtResource("1_06fwv")
 
@@ -33,6 +36,9 @@ stream = ExtResource("3_avtv5")
 
 [node name="LaunchSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ftayl")
+
+[node name="CollisionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_hgoxt")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
