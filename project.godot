@@ -12,7 +12,12 @@ config_version=5
 
 config/name="AngryAnimals"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=600
+window/stretch/mode="canvas_items"
 
 [rendering]
 
