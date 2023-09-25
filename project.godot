@@ -13,6 +13,10 @@ config_version=5
 config/name="AngryAnimals"
 config/features=PackedStringArray("4.1", "Mobile")
 
+[autoload]
+
+SignalManager="*res://singletons/signal_manager.gd"
+
 [display]
 
 window/size/viewport_width=1024
