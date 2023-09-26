@@ -118,6 +118,7 @@ func release_it() -> void:
 	apply_central_impulse(get_impluse())
 	stretch_sound.stop()
 	launch_sound.play()
+	ScoreManager.attempt_made()
 
 func get_impluse() -> Vector2:
 	return _dragged_vector * -1 * IMPULSE_MULT
