@@ -6,4 +6,10 @@
 [node name="Level1" instance=ExtResource("1_igajb")]
 
 [node name="Cup" parent="." index="4" instance=ExtResource("2_nc0u0")]
-position = Vector2(304, 462)
+position = Vector2(415, 430)
+
+[node name="Cup2" parent="." index="5" instance=ExtResource("2_nc0u0")]
+position = Vector2(538, 351)
+
+[node name="Cup3" parent="." index="6" instance=ExtResource("2_nc0u0")]
+position = Vector2(659, 279)

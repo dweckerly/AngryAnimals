@@ -3,10 +3,12 @@ extends RigidBody2D
 @onready var stretch_sound = $StretchSound
 @onready var launch_sound = $LaunchSound
 @onready var collision_sound = $CollisionSound
+@onready var arrow_sprite = $ArrowSprite
 
 const DRAG_LIM_MAX: Vector2 = Vector2(0, 60)
 const DRAG_LIM_MIN: Vector2 = Vector2(-60, 0)
 const IMPULSE_MULT: float = 20.0
+const IMPULSE_MAX: float = 1200.0
 const FIRE_DELAY: float = 0.25
 const STOPPED: float = 0.2
 
@@ -19,10 +21,13 @@ var _dragged_vector: Vector2 = Vector2.ZERO
 var _last_dragged_position: Vector2 = Vector2.ZERO
 var _last_drag_amount: float = 0.0
 var _fired_time: float = 0.0
+var _arrow_scale_x: float = 0.0
 var _last_collision_count: int = 0
 
 func _ready():
 	_start = global_position
+	_arrow_scale_x = arrow_sprite.scale.x
+	arrow_sprite.hide()
 
 func _physics_process(delta):
 	update_debug_label()
@@ -65,6 +70,12 @@ func update_debug_label() -> void:
 	]
 	SignalManager.on_update_debug_label.emit(s)
 
+func scale_rotate_arrow() -> void:
+	var impulse_length = get_impluse().length()
+	var percent = impulse_length / IMPULSE_MAX
+	arrow_sprite.scale.x = (_arrow_scale_x * percent) + _arrow_scale_x
+	arrow_sprite.rotation = (_start - global_position).angle()
+
 func stopped_rolling() -> bool:
 	return (
 		get_contact_count() > 0 and 
@@ -91,6 +102,7 @@ func grab_it() -> void:
 	_dragging = true
 	_drag_start = get_global_mouse_position()
 	_last_dragged_position = _drag_start
+	arrow_sprite.show()
 
 func drag_it() -> void:
 	var gmp = get_global_mouse_position()
@@ -110,6 +122,7 @@ func drag_it() -> void:
 		DRAG_LIM_MAX.y
 	)
 	global_position = _start + _dragged_vector
+	scale_rotate_arrow()
 
 func release_it() -> void:
 	_dragging = false
@@ -119,6 +132,7 @@ func release_it() -> void:
 	stretch_sound.stop()
 	launch_sound.play()
 	ScoreManager.attempt_made()
+	arrow_sprite.hide()
 
 func get_impluse() -> Vector2:
 	return _dragged_vector * -1 * IMPULSE_MULT
