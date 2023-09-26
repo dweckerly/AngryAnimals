@@ -29,9 +29,11 @@ func get_best_for_level(level: int) -> int:
 func get_attempts() -> int:
 	return _attempts
 
-
 func get_level_selected() -> int:
 	return _level_selected
+
+func set_target_cups(t: int) -> void:
+	_target_cups = t
 
 func on_cup_destroyed() -> void:
 	_cups_hit += 1
