@@ -8,12 +8,14 @@ const DEFAULT_SCALE: Vector2 = Vector2(1.0, 1.0)
 @onready var level_label = $MC/VB/LevelLabel
 @onready var score_label = $MC/VB/ScoreLabel
 
-# Called when the node enters the scene tree for the first time.
+var _level_scene: PackedScene
+
 func _ready():
 	level_label.text = str(level_number)
+	_level_scene = load("res://level/level_%s.tscn" % level_number)
 
 func _on_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_packed(_level_scene)
 
 
 func _on_mouse_entered():

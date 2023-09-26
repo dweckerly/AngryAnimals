@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.1", "Mobile")
 
 SignalManager="*res://singletons/signal_manager.gd"
 GameManager="*res://singletons/game_manager.gd"
+ScoreManager="*res://singletons/score_manager.gd"
 
 [display]
 
